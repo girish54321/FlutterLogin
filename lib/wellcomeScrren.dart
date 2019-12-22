@@ -53,7 +53,7 @@ class _WellcomeScrrenState extends State<WellcomeScrren> {
                     Text(
                       "This App Is For",
                       style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 27,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
@@ -63,7 +63,7 @@ class _WellcomeScrrenState extends State<WellcomeScrren> {
                     Text(
                       "Hold the tinsel—the rainbow eucalyptus tree doesn’t need decorations to appear festive for the holidays.",
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 18,
                         color: Colors.white,
                       ),
                     ),
@@ -87,6 +87,7 @@ class _WellcomeScrrenState extends State<WellcomeScrren> {
                               child: Text(
                                 "Login",
                                 style: TextStyle(
+                                    fontSize: 17,
                                     color: Colors.blue,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -107,7 +108,7 @@ class _WellcomeScrrenState extends State<WellcomeScrren> {
                           child: Container(
                             height: 50,
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white),
+                              border: Border.all(color: Colors.white,width: 2),
                               borderRadius: BorderRadius.circular(10),
                               color: Colors.blueAccent,
                             ),
@@ -115,6 +116,7 @@ class _WellcomeScrrenState extends State<WellcomeScrren> {
                               child: Text(
                                 "Sign Up",
                                 style: TextStyle(
+                                    fontSize: 17,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),

@@ -2,7 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:login_scrren/FadeAnimation.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
-class Login extends StatelessWidget {
+import 'inputText.dart';
+
+class Login extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  FocusNode emailFoucs = FocusNode();
+  FocusNode passwordFoucs = FocusNode();
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  bool password = true;
+
+  void changePassword() {
+    if (password) {
+      setState(() {
+        password = false;
+      });
+    } else {
+      setState(() {
+        password = true;
+      });
+    }
+  }
+
+  void gotoPassword(text) {
+    FocusScope.of(context).requestFocus(passwordFoucs);
+  }
+
+//  void chackEmail(text){
+//    if(text)
+//  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -63,12 +105,14 @@ class Login extends StatelessWidget {
                     Positioned(
                       top: 10,
                       left: 10,
-                      child: FadeAnimation(1,IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {})),
+                      child: FadeAnimation(
+                          1,
+                          IconButton(
+                              icon: Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {})),
                     ),
                     Positioned(
                       top: 60,
@@ -111,50 +155,46 @@ class Login extends StatelessWidget {
                                       ]),
                                   child: Column(
                                     children: <Widget>[
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 4, vertical: 8),
-                                        decoration: BoxDecoration(),
-                                        child: TextField(
-                                          decoration: InputDecoration(
-//                                              border: InputBorder.none,
-                                              suffixIcon: Icon(
-                                                EvaIcons.checkmark,
-                                                size: 23,
-                                              ),
-                                              prefixIcon: Icon(
-                                                EvaIcons.emailOutline,
-                                                size: 23,
-                                              ),
-                                              hintText: "Email",
-                                              hintStyle: TextStyle(
-                                                  color: Colors.grey[400])),
+                                      InputText(
+                                        focusNode: emailFoucs,
+                                        changeFous: gotoPassword,
+                                        password: false,
+                                        textEditingController: emailController,
+                                        leftIcon: Icon(
+                                          EvaIcons.emailOutline,
+                                          size: 23,
+                                        ),
+                                        hint: "Email",
+                                        rightIcon: IconButton(
+                                          icon: Icon(
+                                            EvaIcons.checkmark,
+                                            size: 23,
+                                          ),
+                                          onPressed: () {
+                                            changePassword();
+                                          },
                                         ),
                                       ),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 4, vertical: 8),
-                                        decoration: BoxDecoration(),
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                              prefixIcon: Icon(
-                                                EvaIcons.lockOutline,
-                                                size: 23,
-                                              ),
-//                                            border: InputBorder.none,
-//                                            icon: Icon(Icons.email),
-                                              suffixIcon: IconButton(
-                                                icon: Icon(
-                                                  EvaIcons.eyeOff,
-                                                  size: 23,
-                                                ),
-                                                onPressed: () {
-                                                  print("CLERARE");
-                                                },
-                                              ),
-                                              hintText: "Password",
-                                              hintStyle: TextStyle(
-                                                  color: Colors.grey[400])),
+                                      InputText(
+                                        focusNode: passwordFoucs,
+                                        password: password,
+                                        textEditingController:
+                                            passwordController,
+                                        leftIcon: Icon(
+                                          EvaIcons.lock,
+                                          size: 23,
+                                        ),
+                                        hint: "Password",
+                                        rightIcon: IconButton(
+                                          icon: Icon(
+                                            password
+                                                ? EvaIcons.eyeOff
+                                                : EvaIcons.eye,
+                                            size: 23,
+                                          ),
+                                          onPressed: () {
+                                            changePassword();
+                                          },
                                         ),
                                       ),
                                     ],
@@ -179,6 +219,7 @@ class Login extends StatelessWidget {
                                     child: Text(
                                       "Login",
                                       style: TextStyle(
+                                          fontSize: 17,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
                                     ),
