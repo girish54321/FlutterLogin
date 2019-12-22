@@ -9,6 +9,9 @@ class InputText extends StatefulWidget {
   final bool password;
   final Function changeFous;
   final FocusNode focusNode;
+  final TextInputType textInputType;
+  final String errorText;
+  final Function onChnaged;
 
   const InputText(
       {Key key,
@@ -18,7 +21,9 @@ class InputText extends StatefulWidget {
       this.textEditingController,
       this.password,
       this.changeFous,
-      this.focusNode});
+      this.focusNode,
+      this.textInputType,
+      this.errorText, this.onChnaged});
 
   @override
   _InputTextState createState() => _InputTextState();
@@ -31,12 +36,14 @@ class _InputTextState extends State<InputText> {
       padding: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
       decoration: BoxDecoration(),
       child: TextField(
+        keyboardType: widget.textInputType,
         focusNode: widget.focusNode,
-        onChanged: (text) {},
+        onChanged: widget.onChnaged,
         onSubmitted: widget.changeFous,
         obscureText: widget.password,
         controller: widget.textEditingController,
         decoration: InputDecoration(
+            errorText: widget.errorText,
             prefixIcon: widget.leftIcon,
             suffixIcon: widget.rightIcon,
             hintText: widget.hint,

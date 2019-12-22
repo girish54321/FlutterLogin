@@ -13,7 +13,7 @@ class _CreateAccountState extends State<CreateAccount> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Color.fromRGBO(0,89,212,1),
       body: ListView(
         children: <Widget>[
           Container(
@@ -75,7 +75,9 @@ class _CreateAccountState extends State<CreateAccount> {
                               Icons.arrow_back_ios,
                               color: Colors.white,
                             ),
-                            onPressed: () {})),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            })),
                   ),
                   Positioned(
                     top: 60,
@@ -108,7 +110,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                 padding: EdgeInsets.all(5),
                                 decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(5),
                                     boxShadow: [
                                       BoxShadow(
                                           color:
@@ -188,7 +190,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               Container(
                                 height: 50,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(5),
                                   color: Colors.blueAccent,
                                 ),
                                 child: Center(
@@ -204,18 +206,20 @@ class _CreateAccountState extends State<CreateAccount> {
                           SizedBox(
                             height: 10,
                           ),
-                         FadeAnimation(2, Row(children: <Widget>[
-                            Expanded(child: Divider()),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              child: Text(
-                                "OR",
-                                style:
-                                    TextStyle(fontSize: 14, color: Colors.grey),
-                              ),
-                            ),
-                            Expanded(child: Divider()),
-                          ])),
+                          FadeAnimation(
+                              2,
+                              Row(children: <Widget>[
+                                Expanded(child: Divider()),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child: Text(
+                                    "OR",
+                                    style: TextStyle(
+                                        fontSize: 17, color: Colors.grey),
+                                  ),
+                                ),
+                                Expanded(child: Divider()),
+                              ])),
                           SizedBox(
                             height: 10,
                           ),
@@ -225,7 +229,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                 height: 50,
                                 decoration: BoxDecoration(
                                   border: Border.all(color: Colors.blueAccent),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(5),
                                   color: Colors.white,
                                 ),
                                 child: Center(

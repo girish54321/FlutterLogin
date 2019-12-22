@@ -80,7 +80,7 @@ class _WellcomeScrrenState extends State<WellcomeScrren> {
                           child: Container(
                             height: 50,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(5),
                               color: Colors.white,
                             ),
                             child: Center(
@@ -109,7 +109,7 @@ class _WellcomeScrrenState extends State<WellcomeScrren> {
                             height: 50,
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.white,width: 2),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(5),
                               color: Colors.blueAccent,
                             ),
                             child: Center(

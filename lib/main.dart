@@ -5,7 +5,11 @@ import 'package:login_scrren/wellcomeScrren.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'hindregular'),
+
+      theme: ThemeData(
+        fontFamily: 'hindregular',
+        primaryColor: Color.fromRGBO(0, 89, 212, 1),
+      ),
       home: WellcomeScrren(),
 //      home: CreateAccount(),
 //      home: CreateAccount(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_scrren/FadeAnimation.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-
+import 'package:email_validator/email_validator.dart';
 import 'inputText.dart';
 
 class Login extends StatefulWidget {
@@ -17,6 +17,9 @@ class _LoginState extends State<Login> {
   final passwordController = TextEditingController();
 
   bool password = true;
+  bool emailValid = true;
+  String emailErrorText = null;
+  String passwordErrorText = null;
 
   void changePassword() {
     if (password) {
@@ -34,9 +37,41 @@ class _LoginState extends State<Login> {
     FocusScope.of(context).requestFocus(passwordFoucs);
   }
 
-//  void chackEmail(text){
-//    if(text)
-//  }
+  void chackEmail(email) {
+    if (EmailValidator.validate(email)) {
+      print("ALL GOOSD");
+      setState(() {
+        emailValid = true;
+      });
+    } else {
+      setState(() {
+        emailValid = false;
+      });
+      print("ERROR");
+    }
+  }
+
+  void checkInputs() {
+    if (EmailValidator.validate(emailController.text)) {
+      setState(() {
+        emailErrorText = null;
+      });
+    } else {
+      setState(() {
+        emailErrorText = "Plz Enter Vaild Email";
+      });
+    }
+
+    if (passwordController.text.length < 8) {
+      setState(() {
+        passwordErrorText = "Passowrd Is Not Valid";
+      });
+    }else{
+      setState(() {
+        passwordErrorText = null;
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -50,7 +85,7 @@ class _LoginState extends State<Login> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-        backgroundColor: Colors.blueAccent,
+        backgroundColor:Color.fromRGBO(0, 89, 212, 1),
         body: ListView(
           children: <Widget>[
             Container(
@@ -112,7 +147,9 @@ class _LoginState extends State<Login> {
                                 Icons.arrow_back_ios,
                                 color: Colors.white,
                               ),
-                              onPressed: () {})),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              })),
                     ),
                     Positioned(
                       top: 60,
@@ -145,7 +182,7 @@ class _LoginState extends State<Login> {
                                   padding: EdgeInsets.all(5),
                                   decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(5),
                                       boxShadow: [
                                         BoxShadow(
                                             color: Color.fromRGBO(
@@ -156,6 +193,10 @@ class _LoginState extends State<Login> {
                                   child: Column(
                                     children: <Widget>[
                                       InputText(
+                                        errorText: emailErrorText,
+                                        onChnaged: chackEmail,
+                                        textInputType:
+                                            TextInputType.emailAddress,
                                         focusNode: emailFoucs,
                                         changeFous: gotoPassword,
                                         password: false,
@@ -166,16 +207,21 @@ class _LoginState extends State<Login> {
                                         ),
                                         hint: "Email",
                                         rightIcon: IconButton(
-                                          icon: Icon(
-                                            EvaIcons.checkmark,
-                                            size: 23,
-                                          ),
-                                          onPressed: () {
-                                            changePassword();
-                                          },
+                                          icon: emailValid
+                                              ? Icon(
+                                                  EvaIcons.checkmark,
+                                                  color: Colors.green,
+                                                  size: 23,
+                                                )
+                                              : Icon(
+                                                  EvaIcons.close,
+                                                  color: Colors.red,
+                                                  size: 23,
+                                                ),
                                         ),
                                       ),
                                       InputText(
+                                        errorText: passwordErrorText,
                                         focusNode: passwordFoucs,
                                         password: password,
                                         textEditingController:
@@ -201,39 +247,81 @@ class _LoginState extends State<Login> {
                                   ),
                                 )),
                             SizedBox(
-                              height: 30,
+                              height: 15,
+                            ),
+                            FadeAnimation(
+                                2,
+                                Text(
+                                  "Forgot Password?",
+                                  style: TextStyle(
+                                      color: Color.fromRGBO(143, 148, 251, 1)),
+                                )),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            FadeAnimation(
+                                2,
+                                GestureDetector(
+                                  onTap: () {
+                                    checkInputs();
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Colors.blueAccent,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Login",
+                                        style: TextStyle(
+                                            fontSize: 17,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                )),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            FadeAnimation(
+                                2,
+                                Row(children: <Widget>[
+                                  Expanded(child: Divider()),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    child: Text(
+                                      "OR",
+                                      style: TextStyle(
+                                          fontSize: 17, color: Colors.grey),
+                                    ),
+                                  ),
+                                  Expanded(child: Divider()),
+                                ])),
+                            SizedBox(
+                              height: 10,
                             ),
                             FadeAnimation(
                                 2,
                                 Container(
                                   height: 50,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-//                                gradient: LinearGradient(colors: [
-//                                  Color.fromRGBO(143, 148, 251, 1),
-//                                  Color.fromRGBO(143, 148, 251, .6),
-//                                ])
-                                    color: Colors.blueAccent,
+                                    border:
+                                        Border.all(color: Colors.blueAccent),
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.white,
                                   ),
                                   child: Center(
                                     child: Text(
-                                      "Login",
+                                      "Sign In",
                                       style: TextStyle(
                                           fontSize: 17,
-                                          color: Colors.white,
+                                          color: Colors.blueAccent,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                )),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            FadeAnimation(
-                                1.5,
-                                Text(
-                                  "Forgot Password?",
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(143, 148, 251, 1)),
                                 )),
                           ],
                         ),
