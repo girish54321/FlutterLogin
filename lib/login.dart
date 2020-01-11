@@ -125,6 +125,7 @@ class _LoginState extends State<Login> {
     } catch (_) {
       print("cARCT");
       print(_);
+      _showAlert(context,"No Network", "Plz Check your network");
       setState(() {
         loading = false;
       });

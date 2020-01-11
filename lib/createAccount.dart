@@ -154,6 +154,7 @@ class _CreateAccountState extends State<CreateAccount> {
     } catch (_) {
       print("cARCT");
       print(_);
+       _showAlert(context,"No Network", "Plz Check your network");
       setState(() {
         loading = false;
       });
